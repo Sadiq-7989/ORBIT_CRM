@@ -1,31 +1,46 @@
 @import "tailwindcss";
 
 @theme {
-  /* ODS Color Palette */
-  --color-primary: #4f46e5;
-  --color-secondary: #0ea5e9;
-  --color-accent: #8b5cf6;
-  --color-success: #22c55e;
-  --color-warning: #f59e0b;
-  --color-error: #ef4444;
+  /* OrbitOS v2 Design System Colors */
+  --color-primary: #563dff;        /* Cosmic Indigo */
+  --color-secondary: #8b5cf6;      /* Aurora Violet */
+  --color-accent: #06b6d4;         /* Electric Cyan */
+  --color-success: #10b981;        /* Emerald Success */
+  --color-warning: #f59e0b;        /* Amber Warning */
+  --color-error: #f43f5e;          /* Rose Error */
 
-  --color-background-light: #f8fafc;
-  --color-background-dark: #020617;
+  /* Surface and Background Neutral Grays */
+  --color-background-light: #f3f4f6; /* Pearl White Base */
+  --color-background-dark: #030712;  /* Deep Navy Base */
   --color-surface-light: #ffffff;
-  --color-surface-dark: #0f172a;
+  --color-surface-dark: #090d16;     /* Glass Dark Base */
 
-  /* ODS Typography */
+  /* OrbitOS Typography */
   --font-sans: "Inter", system-ui, -apple-system, sans-serif;
 
-  /* ODS Border Radius scale */
-  --radius-orbit-card: 16px;
-  --radius-orbit-button: 12px;
-  --radius-orbit-input: 12px;
-  --radius-orbit-modal: 20px;
+  /* OrbitOS Smooth Border Radii */
+  --radius-orbit-card: 24px;
+  --radius-orbit-button: 14px;
+  --radius-orbit-input: 14px;
+  --radius-orbit-modal: 28px;
   --radius-orbit-badge: 999px;
 
-  /* ODS Soft Shadow definitions */
-  --shadow-orbit-card: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.025);
-  --shadow-orbit-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
-  --shadow-orbit-modal: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  /* OrbitOS Layered Soft Shadows */
+  --shadow-orbit-card: 0 10px 30px -10px rgba(0, 0, 0, 0.04), 0 1px 1px rgba(0, 0, 0, 0.01);
+  --shadow-orbit-hover: 0 20px 40px -15px rgba(86, 61, 255, 0.08), 0 1px 2px rgba(86, 61, 255, 0.02);
+  --shadow-orbit-modal: 0 30px 60px -20px rgba(0, 0, 0, 0.15), 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* Custom global overrides for premium glassmorphism scrollbars and transitions */
+html, body {
+  background: var(--color-background-light);
+  color: #1f2937;
+  overflow-x: hidden;
+}
+
+@media (prefers-color-scheme: dark) {
+  html, body {
+    background: var(--color-background-dark);
+    color: #f3f4f6;
+  }
 }
