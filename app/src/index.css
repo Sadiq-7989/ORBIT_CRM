@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+@theme {
+  /* ODS Color Palette */
+  --color-primary: #4f46e5;
+  --color-secondary: #0ea5e9;
+  --color-accent: #8b5cf6;
+  --color-success: #22c55e;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+
+  --color-background-light: #f8fafc;
+  --color-background-dark: #020617;
+  --color-surface-light: #ffffff;
+  --color-surface-dark: #0f172a;
+
+  /* ODS Typography */
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+
+  /* ODS Border Radius scale */
+  --radius-orbit-card: 16px;
+  --radius-orbit-button: 12px;
+  --radius-orbit-input: 12px;
+  --radius-orbit-modal: 20px;
+  --radius-orbit-badge: 999px;
+
+  /* ODS Soft Shadow definitions */
+  --shadow-orbit-card: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.025);
+  --shadow-orbit-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+  --shadow-orbit-modal: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
