@@ -1,8 +1,12 @@
+import { useState } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { OrbitSidebar } from './OrbitSidebar';
 import { OrbitNavbar } from './OrbitNavbar';
+import { AIFloatingButton } from '../../features/ai/components/AIFloatingButton';
+import { AIChatPanel } from '../../features/ai/components/AIChatPanel';
 
 export function AppLayout() {
+  const [isChatOpen, setIsChatOpen] = useState(false);
   const location = useLocation();
   const isDashboard = location.pathname === '/dashboard' || location.pathname === '/';
 
@@ -27,6 +31,10 @@ export function AppLayout() {
           <Outlet />
         </main>
       </div>
+
+      {/* Floating AI Assistant Trigger & Panel */}
+      <AIFloatingButton onClick={() => setIsChatOpen(true)} isOpen={isChatOpen} />
+      <AIChatPanel isOpen={isChatOpen} onClose={() => setIsChatOpen(false)} />
     </div>
   );
 }
