@@ -24,10 +24,19 @@ export function LoginPage() {
 
     try {
       setIsSubmitting(true);
-      await login(email);
+      await login(email, password);
       navigate('/dashboard', { replace: true });
-    } catch (err) {
-      setError('Invalid email or password.');
+    } catch (err: any) {
+      let message = 'Invalid email or password.';
+      const errMsg = err?.message || '';
+      if (errMsg.includes('Invalid login credentials') || errMsg.includes('invalid_credentials')) {
+        message = 'Invalid email or password. Please try again.';
+      } else if (errMsg.includes('Failed to fetch') || errMsg.includes('NetworkError') || errMsg.includes('network')) {
+        message = 'Network failure. Please check your internet connection.';
+      } else if (err?.message) {
+        message = err.message;
+      }
+      setError(message);
     } finally {
       setIsSubmitting(false);
     }

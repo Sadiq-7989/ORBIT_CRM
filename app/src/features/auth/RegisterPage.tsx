@@ -35,10 +35,21 @@ export function RegisterPage() {
 
     try {
       setIsSubmitting(true);
-      await register(name, email);
+      await register(name, email, password);
       navigate('/dashboard', { replace: true });
-    } catch (err) {
-      setError('Failed to create an account.');
+    } catch (err: any) {
+      let message = 'Failed to create an account.';
+      const errMsg = err?.message || '';
+      if (errMsg.includes('User already registered') || errMsg.includes('already exists')) {
+        message = 'An account with this email already exists.';
+      } else if (errMsg.includes('Password should be') || errMsg.includes('weak') || errMsg.includes('should be at least')) {
+        message = 'Weak password. It must be at least 6 characters.';
+      } else if (errMsg.includes('Failed to fetch') || errMsg.includes('NetworkError') || errMsg.includes('network')) {
+        message = 'Network failure. Please check your internet connection.';
+      } else if (err?.message) {
+        message = err.message;
+      }
+      setError(message);
     } finally {
       setIsSubmitting(false);
     }
