@@ -1,13 +1,16 @@
-import { useState } from 'react';
-
 interface SidebarNavItem {
   name: string;
   icon: React.ReactNode;
   id: string;
 }
 
+import { NavLink } from 'react-router-dom';
+import { useAuth } from '../../features/auth/AuthContext';
+
 export function OrbitSidebar() {
-  const [activeItem, setActiveItem] = useState('dashboard');
+  const { user, logout } = useAuth();
+  const displayName = user?.name || 'User';
+  const initial = displayName.charAt(0).toUpperCase();
 
   const navItems: SidebarNavItem[] = [
     {
@@ -103,19 +106,20 @@ export function OrbitSidebar() {
       {/* Navigation Menu */}
       <nav className="flex-1 space-y-1.5 px-1">
         {navItems.map((item) => (
-          <button
+          <NavLink
             key={item.id}
-            type="button"
-            onClick={() => setActiveItem(item.id)}
-            className={`w-full group flex items-center gap-3.5 px-4 py-3 text-xs font-semibold tracking-wide rounded-orbit-button transition-all duration-200 cursor-pointer ${
-              activeItem === item.id
-                ? "bg-gradient-to-r from-primary to-secondary text-white shadow-lg shadow-primary/25 border border-white/10"
-                : "text-slate-400 hover:text-white hover:bg-white/5 hover:translate-x-0.5 border border-transparent"
-            }`}
+            to={`/${item.id}`}
+            className={({ isActive }) =>
+              `w-full group flex items-center gap-3.5 px-4 py-3 text-xs font-semibold tracking-wide rounded-orbit-button transition-all duration-200 cursor-pointer border ${
+                isActive
+                  ? "bg-gradient-to-r from-primary to-secondary text-white shadow-lg shadow-primary/25 border-white/10"
+                  : "text-slate-400 hover:text-white hover:bg-white/5 hover:translate-x-0.5 border-transparent"
+              }`
+            }
           >
             {item.icon}
             <span>{item.name}</span>
-          </button>
+          </NavLink>
         ))}
       </nav>
 
@@ -125,16 +129,21 @@ export function OrbitSidebar() {
           <div className="flex items-center gap-3">
             {/* Avatar placeholder with letters */}
             <div className="w-10 h-10 rounded-full bg-gradient-to-br from-slate-800 to-slate-900 border border-white/10 flex items-center justify-center text-white font-extrabold text-sm shadow-md">
-              U
+              {initial}
             </div>
             <div className="flex flex-col">
-              <span className="text-xs font-bold text-white leading-tight">User</span>
+              <span className="text-xs font-bold text-white leading-tight">{displayName}</span>
               <span className="text-[10px] text-slate-500 font-semibold tracking-wide mt-0.5">Administrator</span>
             </div>
           </div>
-          <button type="button" className="p-1.5 text-slate-500 hover:text-slate-300 rounded-lg hover:bg-white/5 transition-colors">
+          <button 
+            type="button" 
+            onClick={logout} 
+            title="Log Out"
+            className="p-1.5 text-slate-500 hover:text-error rounded-lg hover:bg-white/5 transition-colors cursor-pointer"
+          >
             <svg className="w-4.5 h-4.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
             </svg>
           </button>
         </div>

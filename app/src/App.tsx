@@ -1,7 +1,7 @@
-import { AppLayout } from './components/layout/AppLayout'
+import { AppRoutes } from './app/router'
 
 function App() {
-  return <AppLayout />
+  return <AppRoutes />
 }
 
 export default App

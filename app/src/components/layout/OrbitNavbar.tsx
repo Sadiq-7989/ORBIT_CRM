@@ -1,10 +1,17 @@
+import { useLocation } from 'react-router-dom';
+
 export function OrbitNavbar() {
+  const location = useLocation();
+  // Get route segment (e.g., '/dashboard' -> 'dashboard', '/' -> 'dashboard')
+  const path = location.pathname.substring(1) || 'dashboard';
+  const title = path.charAt(0).toUpperCase() + path.slice(1);
+
   return (
     <header className="h-16 bg-surface-light/80 dark:bg-slate-900/60 backdrop-blur-xl border border-gray-200/50 dark:border-white/5 rounded-[20px] shadow-lg flex items-center justify-between px-6 transition-all duration-300">
       {/* Left Title: Premium Typography */}
       <div className="flex items-center">
         <h2 className="text-xs font-extrabold text-gray-900 dark:text-white tracking-widest uppercase">
-          Dashboard
+          {title}
         </h2>
       </div>
 
