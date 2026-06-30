@@ -56,3 +56,11 @@ CREATE TRIGGER on_deals_updated
     BEFORE UPDATE ON public.deals
     FOR EACH ROW
     EXECUTE FUNCTION public.handle_updated_at();
+-- Grant permissions
+GRANT SELECT, INSERT, UPDATE, DELETE
+ON TABLE public.deals
+TO authenticated;
+
+GRANT USAGE
+ON SCHEMA public
+TO authenticated;

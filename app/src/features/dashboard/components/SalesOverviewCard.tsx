@@ -1,4 +1,28 @@
-export function SalesOverviewCard() {
+interface SalesOverviewCardProps {
+  pipelineValue: number;
+  target?: number;
+}
+
+export function SalesOverviewCard({ pipelineValue, target = 1000000 }: SalesOverviewCardProps) {
+  const achievedPercent = Math.min(Math.round((pipelineValue / target) * 1000) / 10, 100);
+  const formattedAchieved = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    maximumFractionDigits: 0,
+  }).format(pipelineValue);
+  const formattedTarget = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    maximumFractionDigits: 0,
+  }).format(target);
+
+  const getStatusText = () => {
+    if (achievedPercent >= 90) return 'Close to achieving this quarter quota!';
+    if (achievedPercent >= 50) return 'More than half way to target, keep closing deals!';
+    if (achievedPercent > 0) return 'On track to grow CRM sales portfolio';
+    return 'Create and close deals to start progress';
+  };
+
   return (
     <div className="bg-white/60 dark:bg-slate-900/40 backdrop-blur-xl rounded-orbit-card border border-slate-200/50 dark:border-white/5 p-6 shadow-orbit-card hover:shadow-orbit-hover hover:border-slate-300 dark:hover:border-white/10 transition-all duration-300 flex flex-col lg:flex-row gap-6 items-stretch h-full">
       
@@ -17,24 +41,24 @@ export function SalesOverviewCard() {
           <p className="text-xs text-slate-500 dark:text-slate-400 font-medium mb-6">
             Monthly target tracking and projections
           </p>
-
+  
           {/* Stats details */}
           <div className="space-y-4">
             <div>
               <div className="flex justify-between items-center text-xs mb-1.5">
                 <span className="text-slate-500 dark:text-slate-400 font-semibold">Monthly Sales Goal</span>
-                <span className="font-extrabold text-slate-800 dark:text-slate-200">82.7% Achieved</span>
+                <span className="font-extrabold text-slate-800 dark:text-slate-200">{achievedPercent}% Achieved</span>
               </div>
               
               {/* Progress Bar Container */}
               <div className="w-full h-2.5 bg-slate-100 dark:bg-slate-950/50 rounded-full overflow-hidden border border-slate-200/20 dark:border-white/5">
                 <div 
                   className="h-full bg-gradient-to-r from-primary via-secondary to-accent rounded-full transition-all duration-1000"
-                  style={{ width: '82.7%' }}
+                  style={{ width: `${achievedPercent}%` }}
                 />
               </div>
             </div>
-
+  
             {/* Quick Metrics Grid */}
             <div className="grid grid-cols-2 gap-4 pt-2">
               <div className="p-3 bg-slate-50/50 dark:bg-slate-950/20 rounded-orbit-button border border-slate-100/50 dark:border-white/5">
@@ -42,7 +66,7 @@ export function SalesOverviewCard() {
                   Achieved
                 </span>
                 <span className="text-lg font-black text-slate-800 dark:text-white">
-                  $248,000
+                  {formattedAchieved}
                 </span>
               </div>
               <div className="p-3 bg-slate-50/50 dark:bg-slate-950/20 rounded-orbit-button border border-slate-100/50 dark:border-white/5">
@@ -50,18 +74,18 @@ export function SalesOverviewCard() {
                   Target
                 </span>
                 <span className="text-lg font-black text-slate-800 dark:text-white">
-                  $300,000
+                  {formattedTarget}
                 </span>
               </div>
             </div>
           </div>
         </div>
-
+  
         {/* Project info footer */}
         <div className="mt-6 pt-4 border-t border-slate-100 dark:border-white/5 flex items-center gap-2">
           <span className="w-2 h-2 rounded-full bg-primary animate-ping" />
           <span className="text-[10px] text-slate-500 dark:text-slate-400 font-semibold leading-none">
-            On track to hit quota by end of month
+            {getStatusText()}
           </span>
         </div>
       </div>

@@ -1,18 +1,21 @@
 import { useState, useEffect } from 'react';
+import { useAuth } from '../../auth/AuthContext';
 
 export function DashboardHeader() {
+  const { user } = useAuth();
   const [greeting, setGreeting] = useState('Good Morning 👋');
   const [dateString, setDateString] = useState('');
 
   useEffect(() => {
     // Determine greeting based on current local time
     const hour = new Date().getHours();
+    const namePart = user?.name ? `, ${user.name.split(' ')[0]}` : '';
     if (hour < 12) {
-      setGreeting('Good Morning 👋');
+      setGreeting(`Good Morning${namePart} 👋`);
     } else if (hour < 18) {
-      setGreeting('Good Afternoon 👋');
+      setGreeting(`Good Afternoon${namePart} 👋`);
     } else {
-      setGreeting('Good Evening 👋');
+      setGreeting(`Good Evening${namePart} 👋`);
     }
 
     // Format local date
@@ -23,7 +26,7 @@ export function DashboardHeader() {
       year: 'numeric',
     };
     setDateString(new Date().toLocaleDateString('en-US', options));
-  }, []);
+  }, [user]);
 
   return (
     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">

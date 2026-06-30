@@ -1,53 +1,39 @@
-interface ActivityItem {
-  id: string;
-  type: 'customer' | 'deal' | 'task';
-  content: React.ReactNode;
-  time: string;
+import type { ActivityItem } from '../../../services/analyticsService';
+
+interface ActivityCardProps {
+  activities: ActivityItem[];
 }
 
-export function ActivityCard() {
-  const activities: ActivityItem[] = [
-    {
-      id: '1',
-      type: 'customer',
-      content: (
-        <span>
-          New customer <strong className="font-bold text-slate-850 dark:text-slate-200">Sarah Jenkins</strong> added by User
-        </span>
-      ),
-      time: '12 mins ago',
-    },
-    {
-      id: '2',
-      type: 'deal',
-      content: (
-        <span>
-          Deal <strong className="font-bold text-slate-850 dark:text-slate-200">Acme Corp Expansion</strong> moved to <span className="px-2 py-0.5 text-[10px] font-bold rounded-full bg-warning/10 text-warning dark:bg-warning/20">Negotiation</span>
-        </span>
-      ),
-      time: '1 hour ago',
-    },
-    {
-      id: '3',
-      type: 'task',
-      content: (
-        <span>
-          Task <strong className="font-bold text-slate-850 dark:text-slate-200">Follow-up phone call</strong> completed by User
-        </span>
-      ),
-      time: '3 hours ago',
-    },
-    {
-      id: '4',
-      type: 'customer',
-      content: (
-        <span>
-          New customer <strong className="font-bold text-slate-850 dark:text-slate-200">Apex Holdings</strong> imported
-        </span>
-      ),
-      time: '5 hours ago',
-    },
-  ];
+function formatRelativeTime(dateString: string) {
+  const now = new Date();
+  const date = new Date(dateString);
+  const diffMs = now.getTime() - date.getTime();
+  const diffMins = Math.floor(diffMs / 60000);
+  
+  if (diffMins < 1) return 'Just now';
+  if (diffMins < 60) return `${diffMins}m ago`;
+  const diffHours = Math.floor(diffMins / 60);
+  if (diffHours < 24) return `${diffHours}h ago`;
+  const diffDays = Math.floor(diffHours / 24);
+  if (diffDays === 1) return 'Yesterday';
+  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+}
+
+function renderContent(content: string) {
+  const parts = content.split(/(\*\*.*?\*\*)/g);
+  return parts.map((part, idx) => {
+    if (part.startsWith('**') && part.endsWith('**')) {
+      return (
+        <strong key={idx} className="font-black text-slate-850 dark:text-slate-200">
+          {part.slice(2, -2)}
+        </strong>
+      );
+    }
+    return part;
+  });
+}
+
+export function ActivityCard({ activities }: ActivityCardProps) {
 
   const getIcon = (type: 'customer' | 'deal' | 'task') => {
     switch (type) {
@@ -104,11 +90,11 @@ export function ActivityCard() {
 
             {/* Content & Time */}
             <div className="flex-1 min-w-0">
-              <p className="text-xs text-slate-655 dark:text-slate-300 leading-normal mb-0.5">
-                {activity.content}
+              <p className="text-xs text-slate-655 dark:text-slate-350 leading-normal mb-0.5">
+                {renderContent(activity.content)}
               </p>
               <span className="text-[10px] text-slate-400 dark:text-slate-500 font-medium">
-                {activity.time}
+                {formatRelativeTime(activity.created_at)}
               </span>
             </div>
           </div>
