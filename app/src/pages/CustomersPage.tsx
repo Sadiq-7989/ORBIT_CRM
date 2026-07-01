@@ -131,11 +131,37 @@ export function CustomersPage() {
       {/* 3. Main content areas: Loading / Error / Empty / Grid list */}
       {isLoading ? (
         /* Loading Skeleton list */
-        <div className="flex-1 flex flex-col gap-4 py-12 items-center justify-center">
-          <div className="w-10 h-10 rounded-full border-4 border-primary/20 border-t-primary animate-spin" />
-          <span className="text-xs font-bold text-slate-500 tracking-wider uppercase">
-            Loading customers...
-          </span>
+        <div className="w-full flex flex-col gap-4 animate-pulse">
+          <div className="rounded-orbit-card border border-slate-200/50 dark:border-white/5 bg-white/30 dark:bg-slate-950/20 backdrop-blur-sm p-6 space-y-5">
+            <div className="grid grid-cols-5 gap-4 border-b border-slate-200/30 dark:border-white/5 pb-3">
+              <div className="h-3 bg-slate-300 dark:bg-white/10 rounded w-1/3" />
+              <div className="h-3 bg-slate-300 dark:bg-white/10 rounded w-1/2" />
+              <div className="h-3 bg-slate-300 dark:bg-white/10 rounded w-1/4" />
+              <div className="h-3 bg-slate-300 dark:bg-white/10 rounded w-1/3" />
+              <div className="h-3 bg-slate-300 dark:bg-white/10 rounded w-1/6 justify-self-end" />
+            </div>
+            {[...Array(5)].map((_, i) => (
+              <div key={i} className="grid grid-cols-5 gap-4 pt-1 items-center">
+                <div className="space-y-2">
+                  <div className="h-3 bg-slate-200 dark:bg-white/5 rounded w-3/4" />
+                  <div className="h-2 bg-slate-200/60 dark:bg-white/5 rounded w-1/2" />
+                </div>
+                <div className="space-y-2">
+                  <div className="h-3 bg-slate-200 dark:bg-white/5 rounded w-4/5" />
+                  <div className="h-2 bg-slate-200/60 dark:bg-white/5 rounded w-2/3" />
+                </div>
+                <div>
+                  <div className="h-5 bg-slate-200 dark:bg-white/5 rounded-full w-14" />
+                </div>
+                <div>
+                  <div className="h-3.5 bg-slate-200 dark:bg-white/5 rounded w-16" />
+                </div>
+                <div className="justify-self-end">
+                  <div className="h-7 w-12 bg-slate-200 dark:bg-white/5 rounded-orbit-button" />
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       ) : error ? (
         /* Error banner */

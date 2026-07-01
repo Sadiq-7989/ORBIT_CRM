@@ -204,11 +204,23 @@ export function TasksPage() {
       {/* 3. Checklist Grid / Content */}
       {isLoading ? (
         /* Loading States */
-        <div className="flex-1 flex flex-col gap-4 py-16 items-center justify-center">
-          <div className="w-10 h-10 rounded-full border-4 border-primary/20 border-t-primary animate-spin" />
-          <span className="text-xs font-bold text-slate-500 tracking-wider uppercase">
-            Loading tasks checklist...
-          </span>
+        <div className="w-full space-y-4 animate-pulse">
+          {[...Array(5)].map((_, i) => (
+            <div key={i} className="p-4 bg-white/60 dark:bg-slate-900/40 border border-slate-200/50 dark:border-white/5 rounded-orbit-card flex items-center justify-between gap-4 shadow-sm">
+              <div className="flex items-center gap-3 w-2/3">
+                <div className="w-5 h-5 rounded bg-slate-200 dark:bg-white/5 shrink-0" />
+                <div className="space-y-2 w-full">
+                  <div className="h-3 bg-slate-200 dark:bg-white/5 rounded w-1/2" />
+                  <div className="h-2.5 bg-slate-200/60 dark:bg-white/5 rounded w-1/3" />
+                </div>
+              </div>
+              <div className="flex items-center gap-3 shrink-0">
+                <div className="h-5 w-14 bg-slate-200 dark:bg-white/5 rounded-full" />
+                <div className="h-5 w-14 bg-slate-200 dark:bg-white/5 rounded-full" />
+                <div className="h-7 w-12 bg-slate-200 dark:bg-white/5 rounded-orbit-button" />
+              </div>
+            </div>
+          ))}
         </div>
       ) : error ? (
         /* Error banner */

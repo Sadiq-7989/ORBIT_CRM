@@ -170,11 +170,27 @@ export function DealsPage() {
       {/* 3. Pipeline Content Area */}
       {isLoading ? (
         /* Loading States */
-        <div className="flex-1 flex flex-col gap-4 py-16 items-center justify-center">
-          <div className="w-10 h-10 rounded-full border-4 border-primary/20 border-t-primary animate-spin" />
-          <span className="text-xs font-bold text-slate-500 tracking-wider uppercase">
-            Loading deal pipeline...
-          </span>
+        <div className="w-full flex-1 grid grid-cols-1 md:grid-cols-5 gap-6 animate-pulse">
+          {['Lead', 'Contacted', 'Negotiation', 'Won', 'Lost'].map((stage, i) => (
+            <div key={stage} className="flex flex-col gap-4 bg-slate-100/40 dark:bg-slate-950/20 rounded-orbit-card p-4 border border-slate-200/50 dark:border-white/5 min-h-[400px]">
+              <div className="flex justify-between items-center pb-2 border-b border-slate-200/50 dark:border-white/5">
+                <div className="h-3.5 bg-slate-300 dark:bg-white/10 rounded w-1/2" />
+                <div className="h-4 bg-slate-300 dark:bg-white/10 rounded-full w-6" />
+              </div>
+              <div className="space-y-3">
+                {[...Array(i === 0 ? 2 : i === 2 ? 1 : i === 3 ? 2 : 0)].map((_, idx) => (
+                  <div key={idx} className="p-4 bg-white/70 dark:bg-slate-900/40 border border-slate-200/50 dark:border-white/5 rounded-orbit-button space-y-3 shadow-sm">
+                    <div className="h-3 bg-slate-200 dark:bg-white/5 rounded w-5/6" />
+                    <div className="h-2 bg-slate-200/60 dark:bg-white/5 rounded w-1/3" />
+                    <div className="flex justify-between items-center pt-2 border-t border-slate-100 dark:border-white/5">
+                      <div className="h-3.5 bg-slate-200 dark:bg-white/5 rounded w-10" />
+                      <div className="h-5 bg-slate-200 dark:bg-white/5 rounded-full w-10" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
       ) : error ? (
         /* Error banner */

@@ -125,22 +125,22 @@ export function OrbitSidebar() {
 
       {/* Footer Profile Section */}
       <div className="mt-auto pt-4 border-t border-white/5">
-        <div className="flex items-center justify-between p-2 rounded-orbit-button hover:bg-white/5 transition-colors duration-200">
+        <div className="flex items-center justify-between p-2 rounded-orbit-button bg-white/5 border border-white/5 shadow-inner hover:bg-white/10 transition-all duration-300">
           <div className="flex items-center gap-3">
             {/* Avatar placeholder with letters */}
-            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-slate-800 to-slate-900 border border-white/10 flex items-center justify-center text-white font-extrabold text-sm shadow-md">
+            <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary via-secondary to-accent border border-white/20 flex items-center justify-center text-white font-black text-xs shadow-md shadow-primary/20">
               {initial}
             </div>
             <div className="flex flex-col">
               <span className="text-xs font-bold text-white leading-tight">{displayName}</span>
-              <span className="text-[10px] text-slate-500 font-semibold tracking-wide mt-0.5">Administrator</span>
+              <span className="text-[9px] text-slate-500 font-extrabold tracking-wider uppercase mt-0.5">Administrator</span>
             </div>
           </div>
           <button 
             type="button" 
             onClick={logout} 
             title="Log Out"
-            className="p-1.5 text-slate-500 hover:text-error rounded-lg hover:bg-white/5 transition-colors cursor-pointer"
+            className="p-2 text-slate-400 hover:text-error hover:bg-error/15 rounded-orbit-button transition-all duration-250 cursor-pointer"
           >
             <svg className="w-4.5 h-4.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />

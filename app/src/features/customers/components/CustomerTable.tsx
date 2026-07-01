@@ -37,26 +37,26 @@ export function CustomerTable({ customers, onEdit, onDelete }: CustomerTableProp
   };
 
   return (
-    <div className="w-full overflow-x-auto rounded-orbit-card border border-slate-200/50 dark:border-white/5 bg-white/30 dark:bg-slate-950/20 backdrop-blur-sm shadow-sm">
+    <div className="w-full overflow-x-auto rounded-orbit-card border border-slate-200/50 dark:border-white/5 bg-white/30 dark:bg-slate-950/20 backdrop-blur-sm shadow-sm max-h-[580px] overflow-y-auto scrollbar-thin">
       <table className="w-full text-left border-collapse min-w-[700px]">
         <thead>
-          <tr className="border-b border-slate-200/50 dark:border-white/5 bg-slate-50/50 dark:bg-slate-950/40">
-            <th className="px-6 py-4 text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest">
+          <tr className="border-b border-slate-200/50 dark:border-white/5">
+            <th className="sticky top-0 bg-slate-50/95 dark:bg-slate-950/90 backdrop-blur-md px-6 py-4 text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest z-10 border-b border-slate-200/50 dark:border-white/5">
               Name / Company
             </th>
-            <th className="px-6 py-4 text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest">
+            <th className="sticky top-0 bg-slate-50/95 dark:bg-slate-950/90 backdrop-blur-md px-6 py-4 text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest z-10 border-b border-slate-200/50 dark:border-white/5">
               Contact Info
             </th>
-            <th className="px-6 py-4 text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest">
+            <th className="sticky top-0 bg-slate-50/95 dark:bg-slate-950/90 backdrop-blur-md px-6 py-4 text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest z-10 border-b border-slate-200/50 dark:border-white/5">
               Status
             </th>
-            <th className="px-6 py-4 text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest">
+            <th className="sticky top-0 bg-slate-50/95 dark:bg-slate-950/90 backdrop-blur-md px-6 py-4 text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest z-10 border-b border-slate-200/50 dark:border-white/5">
               Source
             </th>
-            <th className="px-6 py-4 text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest">
+            <th className="sticky top-0 bg-slate-50/95 dark:bg-slate-950/90 backdrop-blur-md px-6 py-4 text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest z-10 border-b border-slate-200/50 dark:border-white/5">
               Notes
             </th>
-            <th className="px-6 py-4 text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest text-right">
+            <th className="sticky top-0 bg-slate-50/95 dark:bg-slate-950/90 backdrop-blur-md px-6 py-4 text-[10px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest z-10 text-right border-b border-slate-200/50 dark:border-white/5">
               Actions
             </th>
           </tr>
