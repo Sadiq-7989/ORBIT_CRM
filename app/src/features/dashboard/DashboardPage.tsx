@@ -160,11 +160,11 @@ export function DashboardPage() {
       </div>
 
       {/* 3. Main Dashboard Body: 2/3 Sales Overview, 1/3 Quick Actions + Task/Activity stack */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
         
         {/* Sales Overview Card (Left side, spans 2 columns) */}
         <div className="lg:col-span-2">
-          <SalesOverviewCard pipelineValue={stats?.pipelineValue || 0} />
+          <SalesOverviewCard stats={stats} />
         </div>
 
         {/* Quick Actions + Tasks + Activity (Right side, stacked vertically) */}

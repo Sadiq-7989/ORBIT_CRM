@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthContext';
+import { supabase } from '../../lib/supabase';
 
 export function LoginPage() {
   const { login } = useAuth();
@@ -42,8 +43,22 @@ export function LoginPage() {
     }
   };
 
-  const handleGoogleSignIn = () => {
-    alert('Google Sign-In integration placeholder clicked.');
+  const handleGoogleSignIn = async () => {
+    try {
+      setError('');
+      setIsSubmitting(true);
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: window.location.origin,
+        },
+      });
+      if (error) throw error;
+    } catch (err: any) {
+      setError(err?.message || 'Failed to initialize Google Sign-In.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -153,7 +168,8 @@ export function LoginPage() {
       <button
         type="button"
         onClick={handleGoogleSignIn}
-        className="w-full py-3 text-xs font-bold text-slate-655 dark:text-slate-350 bg-slate-50/50 hover:bg-slate-100/50 dark:bg-white/5 dark:hover:bg-white/10 border border-slate-200/50 dark:border-white/5 rounded-orbit-button transition-all duration-200 hover:scale-[1.01] active:scale-[0.99] flex items-center justify-center gap-2.5 cursor-pointer"
+        disabled={isSubmitting}
+        className="w-full py-3 text-xs font-bold text-slate-655 dark:text-slate-350 bg-slate-50/50 hover:bg-slate-100/50 dark:bg-white/5 dark:hover:bg-white/10 border border-slate-200/50 dark:border-white/5 rounded-orbit-button transition-all duration-200 hover:scale-[1.01] active:scale-[0.99] flex items-center justify-center gap-2.5 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
       >
         <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
           <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
